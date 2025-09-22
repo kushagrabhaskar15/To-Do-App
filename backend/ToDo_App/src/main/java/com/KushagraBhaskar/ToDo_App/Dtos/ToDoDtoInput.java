@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ToDoDto {
+public class ToDoDtoInput {
     private long id;
     private long userId;
     private String heading;
