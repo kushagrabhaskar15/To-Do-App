@@ -1,9 +1,13 @@
 package com.KushagraBhaskar.ToDo_App.Services;
 
-import com.KushagraBhaskar.ToDo_App.Dtos.UserDtoInput;
-
 import java.util.List;
 
+import com.KushagraBhaskar.ToDo_App.Dtos.AddUserRequestDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.UserDto;
+
 public interface UserServices {
-    List<UserDtoInput> getAllUsers();
+    List<UserDto> getAllUsers();
+    UserDto getUserById(Long id);
+    UserDto addUser(AddUserRequestDto addUserRequestDto);
+    void deleteUser(Long id);
 }

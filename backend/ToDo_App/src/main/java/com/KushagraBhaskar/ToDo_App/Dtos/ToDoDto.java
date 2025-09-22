@@ -2,10 +2,12 @@ package com.KushagraBhaskar.ToDo_App.Dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class ToDoDtoInput {
+@NoArgsConstructor
+public class ToDoDto {
     private long id;
     private long userId;
     private String heading;

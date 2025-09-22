@@ -11,8 +11,7 @@ import lombok.Setter;
 public class ToDos {
 
     @Id
-    private long id;
-
+    private long toDoId;
     private long userId;
     private String heading;
     private String description;
