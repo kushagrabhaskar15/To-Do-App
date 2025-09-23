@@ -1,5 +1,6 @@
 package com.KushagraBhaskar.ToDo_App.Services.impl;
 
+import com.KushagraBhaskar.ToDo_App.Dtos.AddToDoRequestDto;
 import com.KushagraBhaskar.ToDo_App.Dtos.ToDoDto;
 import com.KushagraBhaskar.ToDo_App.Entities.ToDos;
 import com.KushagraBhaskar.ToDo_App.Repositories.ToDoRepository;
@@ -18,11 +19,35 @@ public class ToDoServiceImpl implements ToDoServices {
     public final ModelMapper modelMapper;
 
     @Override
-    List<ToDoDto> getToDos(Long Id){
+    public List<ToDoDto> getToDos() {
         List<ToDos> allToDos = toDoRepository.findAll();
-        return   allToDos
+        return allToDos
                 .stream()
-                .map(todo->modelMapper.map(allToDos, ToDoDto.class))
+                .map(toDos -> modelMapper.map(allToDos, ToDoDto.class))
                 .toList();
     }
+
+    @Override
+    public List<ToDoDto> getToDoByHeading(String heading){
+        return  toDoRepository.findAllByHeadingEqualsIgnoreCase(heading)
+                .stream()
+                .map(toDos -> modelMapper.map(toDos,ToDoDto.class))
+                .toList();
+    }
+
+    @Override
+    public ToDoDto addTodo(AddToDoRequestDto addToDoRequestDto){
+        ToDos toDos = modelMapper.map(addToDoRequestDto,ToDos.class);
+        ToDos newToDos = toDoRepository.save(toDos);
+        return modelMapper.map(newToDos,ToDoDto.class);
+    }
+
+    @Override
+    public void deleteToDo(Long id) {
+        if(!toDoRepository.existsById(id)){
+            throw new IllegalArgumentException("The Todo Does Not Exist");
+        }
+        toDoRepository.deleteById(id);
+    }
+
 }
