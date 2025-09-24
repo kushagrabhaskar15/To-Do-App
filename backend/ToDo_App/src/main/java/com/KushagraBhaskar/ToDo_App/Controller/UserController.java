@@ -41,4 +41,12 @@ public class UserController {
         userServices.deleteUser(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @PutMapping("/{id}")
+    ResponseEntity<UserDto> updateUser(@PathVariable Long id,
+                                       @RequestBody AddUserRequestDto addUserRequestDto){
+        return ResponseEntity.status(HttpStatus.OK).body(userServices.updateUser(id, addUserRequestDto));
+    }
+
+
 }
