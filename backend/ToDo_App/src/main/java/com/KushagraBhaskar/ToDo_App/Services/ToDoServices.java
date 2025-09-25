@@ -1,14 +1,14 @@
 package com.KushagraBhaskar.ToDo_App.Services;
 
-import com.KushagraBhaskar.ToDo_App.Dtos.AddToDoRequestDto;
-import com.KushagraBhaskar.ToDo_App.Dtos.ToDoDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.ToDoInputDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.ToDoOutputDto;
 
 import java.util.List;
 
 public interface ToDoServices {
-    List<ToDoDto> getToDos();
-    List<ToDoDto> getToDoByHeading(String heading);
-    ToDoDto addTodo(AddToDoRequestDto addToDoRequestDto);
+    List<ToDoOutputDto> getToDos();
+    List<ToDoOutputDto> getToDoByHeading(String heading);
+    ToDoOutputDto addTodo(ToDoInputDto toDoInputDto);
     void deleteToDo(Long id);
 
 }

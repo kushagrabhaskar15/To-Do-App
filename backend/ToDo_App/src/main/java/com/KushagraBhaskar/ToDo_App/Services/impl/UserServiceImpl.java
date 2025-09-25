@@ -1,8 +1,8 @@
 package com.KushagraBhaskar.ToDo_App.Services.impl;
 
-import com.KushagraBhaskar.ToDo_App.Dtos.AddUserRequestDto;
-import com.KushagraBhaskar.ToDo_App.Dtos.UserDto;
-import com.KushagraBhaskar.ToDo_App.Entities.Users;
+import com.KushagraBhaskar.ToDo_App.Dtos.UserInputDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.UserOutputDto;
+import com.KushagraBhaskar.ToDo_App.Entities.User;
 import com.KushagraBhaskar.ToDo_App.Repositories.UserRepository;
 import com.KushagraBhaskar.ToDo_App.Services.UserServices;
 import lombok.RequiredArgsConstructor;
@@ -19,26 +19,26 @@ public class UserServiceImpl implements UserServices {
     public final ModelMapper modelMapper;
 
     @Override
-    public List<UserDto> getAllUsers() {
-        List<Users> users = userRepository.findAll();
+    public List<UserOutputDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
         return   users
                 .stream()
-                .map(user -> modelMapper.map(user, UserDto.class))
+                .map(user -> modelMapper.map(user, UserOutputDto.class))
                 .toList();
     }
 
     @Override
-    public UserDto getUserById(Long Id){
-        Users user =  userRepository.findById(Id)
+    public UserOutputDto getUserById(Long Id){
+        User user =  userRepository.findById(Id)
                 .orElseThrow(() -> new RuntimeException("User Not Found with the entered Id: "+Id+"!"));
-        return  modelMapper.map(user, UserDto.class);
+        return  modelMapper.map(user, UserOutputDto.class);
     }
 
     @Override
-    public UserDto addUser(AddUserRequestDto addUserRequestDto){
-        Users user = modelMapper.map(addUserRequestDto, Users.class);
-        Users newUser = userRepository.save(user);
-        return modelMapper.map(newUser, UserDto.class);
+    public UserOutputDto addUser(UserInputDto userInputDto){
+        User user = modelMapper.map(userInputDto, User.class);
+        User newUser = userRepository.save(user);
+        return modelMapper.map(newUser, UserOutputDto.class);
     }
 
     @Override
@@ -50,18 +50,14 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public UserDto updateUser(Long Id,AddUserRequestDto newUser){
-        if(!userRepository.existsById(Id)){
-            throw new IllegalArgumentException("User with this Id does not exist!");
-        }
-
-        Users existingUser = userRepository.findById(Id)
+    public UserOutputDto updateUser(Long Id, UserInputDto newUser){
+        User existingUser = userRepository.findById(Id)
                             .orElseThrow(()-> new IllegalArgumentException("No User with such id!"));
 
         existingUser.setUserName(newUser.getUserName());
         existingUser.setName(newUser.getName());
         existingUser.setEmail(newUser.getEmail());
-        return modelMapper.map(existingUser, UserDto.class);
+        return modelMapper.map(existingUser, UserOutputDto.class);
     }
 
 }

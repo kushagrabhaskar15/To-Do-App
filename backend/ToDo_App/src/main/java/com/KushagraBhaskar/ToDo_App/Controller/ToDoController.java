@@ -1,8 +1,7 @@
 package com.KushagraBhaskar.ToDo_App.Controller;
 
-import com.KushagraBhaskar.ToDo_App.Dtos.AddToDoRequestDto;
-import com.KushagraBhaskar.ToDo_App.Dtos.ToDoDto;
-import com.KushagraBhaskar.ToDo_App.Repositories.ToDoRepository;
+import com.KushagraBhaskar.ToDo_App.Dtos.ToDoInputDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.ToDoOutputDto;
 import com.KushagraBhaskar.ToDo_App.Services.ToDoServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,20 +18,20 @@ public class ToDoController {
     public final ToDoServices toDoServices;
 
     @GetMapping
-    ResponseEntity<List<ToDoDto>> getTodos(){
+    ResponseEntity<List<ToDoOutputDto>> getTodos(){
         return ResponseEntity.status(HttpStatus.OK).body(toDoServices.getToDos());
     }
 
     @GetMapping("/{heading}")
-    ResponseEntity<List<ToDoDto>> getToDoByHeading(@PathVariable String heading){
+    ResponseEntity<List<ToDoOutputDto>> getToDoByHeading(@PathVariable String heading){
         return ResponseEntity.ok(toDoServices.getToDoByHeading(heading));
     }
 
     @PostMapping
-    ResponseEntity<ToDoDto> addTodo(@RequestBody AddToDoRequestDto addToDoRequestDto){
+    ResponseEntity<ToDoOutputDto> addTodo(@RequestBody ToDoInputDto toDoInputDto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(toDoServices.addTodo(addToDoRequestDto));
+                .body(toDoServices.addTodo(toDoInputDto));
     }
 
     @DeleteMapping("/{id}")

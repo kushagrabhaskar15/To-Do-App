@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ToDoDto {
-    private long id;
-    private long userId;
-    private String heading;
-    private String description;
-    private boolean completed = false;
+public class UserInputDto {
+    private String userName;
+    private String name;
+    private String email;
 }

@@ -1,8 +1,8 @@
 package com.KushagraBhaskar.ToDo_App.Controller;
 
 
-import com.KushagraBhaskar.ToDo_App.Dtos.AddUserRequestDto;
-import com.KushagraBhaskar.ToDo_App.Dtos.UserDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.UserInputDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.UserOutputDto;
 import com.KushagraBhaskar.ToDo_App.Services.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,20 +20,20 @@ public class UserController {
     public final UserServices userServices;
 
     @GetMapping
-    ResponseEntity<List<UserDto>> getAllUsers() {
+    ResponseEntity<List<UserOutputDto>> getAllUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(userServices.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<UserDto> getUserById(@PathVariable Long id){
+    ResponseEntity<UserOutputDto> getUserById(@PathVariable Long id){
         return ResponseEntity.ok(userServices.getUserById(id));
     }
 
     @PostMapping
-    ResponseEntity<UserDto> addUserData(@RequestBody AddUserRequestDto addUserRequestDto){
+    ResponseEntity<UserOutputDto> addUserData(@RequestBody UserInputDto userInputDto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(userServices.addUser(addUserRequestDto));
+                .body(userServices.addUser(userInputDto));
     }
 
     @DeleteMapping("/{id}")
@@ -43,9 +43,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<UserDto> updateUser(@PathVariable Long id,
-                                       @RequestBody AddUserRequestDto addUserRequestDto){
-        return ResponseEntity.status(HttpStatus.OK).body(userServices.updateUser(id, addUserRequestDto));
+    ResponseEntity<UserOutputDto> updateUser(@PathVariable Long id,
+                                             @RequestBody UserInputDto userInputDto){
+        return ResponseEntity.status(HttpStatus.OK).body(userServices.updateUser(id, userInputDto));
     }
 
 

@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddToDoRequestDto {
+public class ToDoOutputDto {
+    private long id;
     private long userId;
     private String heading;
     private String description;

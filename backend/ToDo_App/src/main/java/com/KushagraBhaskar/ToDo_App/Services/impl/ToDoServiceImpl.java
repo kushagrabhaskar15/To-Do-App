@@ -1,7 +1,7 @@
 package com.KushagraBhaskar.ToDo_App.Services.impl;
 
-import com.KushagraBhaskar.ToDo_App.Dtos.AddToDoRequestDto;
-import com.KushagraBhaskar.ToDo_App.Dtos.ToDoDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.ToDoInputDto;
+import com.KushagraBhaskar.ToDo_App.Dtos.ToDoOutputDto;
 import com.KushagraBhaskar.ToDo_App.Entities.ToDos;
 import com.KushagraBhaskar.ToDo_App.Repositories.ToDoRepository;
 import com.KushagraBhaskar.ToDo_App.Services.ToDoServices;
@@ -19,27 +19,27 @@ public class ToDoServiceImpl implements ToDoServices {
     public final ModelMapper modelMapper;
 
     @Override
-    public List<ToDoDto> getToDos() {
+    public List<ToDoOutputDto> getToDos() {
         List<ToDos> allToDos = toDoRepository.findAll();
         return allToDos
                 .stream()
-                .map(toDos -> modelMapper.map(allToDos, ToDoDto.class))
+                .map(toDos -> modelMapper.map(allToDos, ToDoOutputDto.class))
                 .toList();
     }
 
     @Override
-    public List<ToDoDto> getToDoByHeading(String heading){
+    public List<ToDoOutputDto> getToDoByHeading(String heading){
         return  toDoRepository.findAllByHeadingEqualsIgnoreCase(heading)
                 .stream()
-                .map(toDos -> modelMapper.map(toDos,ToDoDto.class))
+                .map(toDos -> modelMapper.map(toDos, ToDoOutputDto.class))
                 .toList();
     }
 
     @Override
-    public ToDoDto addTodo(AddToDoRequestDto addToDoRequestDto){
-        ToDos toDos = modelMapper.map(addToDoRequestDto,ToDos.class);
+    public ToDoOutputDto addTodo(ToDoInputDto toDoInputDto){
+        ToDos toDos = modelMapper.map(toDoInputDto,ToDos.class);
         ToDos newToDos = toDoRepository.save(toDos);
-        return modelMapper.map(newToDos,ToDoDto.class);
+        return modelMapper.map(newToDos, ToDoOutputDto.class);
     }
 
     @Override
