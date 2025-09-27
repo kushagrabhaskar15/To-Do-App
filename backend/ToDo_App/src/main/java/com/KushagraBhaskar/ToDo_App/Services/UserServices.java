@@ -11,4 +11,5 @@ public interface UserServices {
     UserOutputDto addUser(UserInputDto userInputDto);
     void deleteUser(Long id);
     UserOutputDto updateUser(Long Id, UserInputDto userInputDto);
+    UserOutputDto updateUserMinorDetails(Long id, UserInputDto user);
 }

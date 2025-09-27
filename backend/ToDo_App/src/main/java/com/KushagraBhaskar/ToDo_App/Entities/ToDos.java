@@ -11,7 +11,9 @@ import lombok.Setter;
 public class ToDos {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long toDoId;
+    private long userId;
     private String heading;
     private String description;
     private boolean completed;

@@ -44,9 +44,14 @@ public class UserController {
 
     @PutMapping("/{id}")
     ResponseEntity<UserOutputDto> updateUser(@PathVariable Long id,
-                                             @RequestBody UserInputDto userInputDto){
-        return ResponseEntity.status(HttpStatus.OK).body(userServices.updateUser(id, userInputDto));
+                                             @RequestBody UserInputDto user){
+        return ResponseEntity.status(HttpStatus.OK).body(userServices.updateUser(id, user));
     }
 
+    @PatchMapping("/{id}")
+    ResponseEntity<UserOutputDto> updateUserMinorDetails(@PathVariable Long id,
+                                                         @RequestBody UserInputDto user){
+        return ResponseEntity.status(HttpStatus.OK).body(userServices.updateUserMinorDetails(id,user));
+    }
 
 }

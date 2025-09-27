@@ -60,4 +60,9 @@ public class UserServiceImpl implements UserServices {
         return modelMapper.map(existingUser, UserOutputDto.class);
     }
 
+    @Override
+    public UserOutputDto updateUserMinorDetails(Long id, UserInputDto user) {
+        return null;
+    }
+
 }
